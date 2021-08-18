@@ -7,97 +7,46 @@ library(AICcmodavg)
 library(unmarked)
 
 ####Importing####
-PatchData=read_csv("PatchNestData.csv") #note to self: this was dataset #10
-ArthAbund=read_csv("ArthAbund.csv")
-Clutch=read_csv("ClutchSize_SnS.csv")
-DICKData=read_csv("DICK_RData2.csv")
+setwd('/cloud/project/Data')
+ArthAbund  = read_csv("ArthAbund.csv")
+Clutch     = read_csv("ClutchSize_SnS.csv")
+DICK_data  = read_csv("DICK_RData2.csv")
+Mass       = read_csv("NestlingMass_SnS.csv")
+Parasitism = read_csv("Parasitism_SprayPasturesOnly_EarlyDeathsRemoved_6.8.18.csv")
+PatchData  = read_csv("PatchNestData.csv") #note to self: this was dataset #10
+Prov       = read_csv("Provisioning_byClip.csv")
 
 ####..............................####
 ####1. PASTURE SCALE####
 ####..............................####
 ####1a. Male abundance####
 
-
-
 abundance_by_visit=DICK_data[,4:8]
-
 siteCovs=data.frame(list(Past_Pat_Year=DICK_data[,1], Year=DICK_data[,2], Pasture=DICK_data[,3], Area=DICK_data[,34], FireTreat=DICK_data[,35], TSF=DICK_data[,36],TSH=DICK_data[,37],HerbTreat=DICK_data[,38],GrazingYesNo=DICK_data[,39],HerbYesNo=DICK_data[,40],GrazingTreat=DICK_data[,41]))
-
 obsCovs=list(wind=DICK_data[,24:28],DOY=DICK_data[,14:18],clouds=DICK_data[,9:13],starttime=DICK_data[,19:23],obs=DICK_data[,29:33])
-
-
 DICK_PCount=unmarkedFramePCount(abundance_by_visit,
                                 siteCovs,
                                 obsCovs)
 
-# Selecting the best model for detection
-null=pcount(~1~1, data=DICK_PCount, K=100)
-model_1=pcount(~wind ~1, data=DICK_PCount, K=100)
-model_2=pcount(~DOY ~1, data=DICK_PCount, K=100)
-model_3=pcount(~clouds ~1, data=DICK_PCount, K=100)
-model_4=pcount(~obs ~1, data=DICK_PCount, K=100)
-model_5=pcount(~clouds+wind ~1, data=DICK_PCount, K=100)
-model_6=pcount(~wind+obs+clouds ~1, data=DICK_PCount, K=100)
+DICK_Abund_Global=pcount(~obs+wind+clouds+DOY+starttime ~HerbTreat_14.18+GrazingYesNo+offset(log(Area_ha)), data=DICK_PCount, K=100)
+summary(DICK_Abund_Global)
 
+exp(coef(DICK_Abund_Global, type = "state"))
+exp(confint(DICK_Abund_Global, type = "state", level = 0.90))
 
-null
-
-model_selection_det <- fitList("Null"=null,
-                               "det(wind)abund(.)"=model_1,
-                               "det(DOY)abund(.)"=model_2,
-                               "det(clouds)abund(.)"=model_3,
-                               "det(obs)abund(.)"=model_4,
-                               "det(clouds+wind)abund(.)"=model_5,
-                               "det(obs+wind)abund(.)"=model_6)
-modSel(model_selection_det)
-
-# Selecting the best model for abundance
-null2=pcount(~obs+wind ~offset(log(Area)), data=DICK_PCount, K=100)
-model_7=pcount(~obs+wind ~HerbTreat+offset(log(Area)), data=DICK_PCount, K=100)
-model_8=pcount(~obs+wind ~GrazingYesNo+offset(log(Area)), data=DICK_PCount, K=100)
-model_9=pcount(~obs+wind ~GrazingYesNo+HerbTreat+offset(log(Area)), data=DICK_PCount, K=100)
-model_10=pcount(~obs+wind ~HerbYesNo+offset(log(Area)), data=DICK_PCount, K=100)
-model_11=pcount(~obs+wind ~HerbYesNo+GrazingYesNo+offset(log(Area)), data=DICK_PCount, K=100)
-
-model_selection_abund <- fitList("det(obs+wind)abund(.)"=null2,
-                                 "det(obs+wind)abund(HerbTreat)"=model_7,
-                                 "det(obs+wind)abund(GrazingYesNo)"=model_8,
-                                 "det(obs+wind)abund(GrazingYesNo+HerbTreat)"=model_9,
-                                 "det(obs+wind)abund(HerbYesNo)"=model_10,
-                                 "det(obs+wind)abund(HerbYesNo+GrazingYesNo)"=model_11)
-modSel(model_selection_abund)
-
-summary (model_9)
-LRT(model_9, model_7)
-LRT(model_9,model_8)
-LRT(model_7,null2)
-
-#coefficients and confidence intervals in log scale
-
-coef(model_9, type = "state")
-backTransform(model_9,type='det')
-confint(model_9, type = "state", level = 0.90)
-
-#odds ratios (exponentiated beta coefficients)
-
-exp(coef(model_9, type = "state"))
-exp(confint(model_9, type = "state", level = 0.90))
-
-deviance (model_9)
+DICK_Abund_Final=pcount(~obs+wind+clouds ~HerbTreat_14.18+GrazingYesNo+offset(log(Area_ha)), data=DICK_PCount, K=100)
+summary(DICK_Abund_Final)
 
 #predict abundance over newdata values
+DICK_Abund_newdata = data.frame(GrazingYesNo = c("Yes", "Yes", "Yes","No", "No","No"),
+                     HerbTreat_14.18 = c("Con","SnS","Spr"),
+                     Area_ha=1)
+print(DICK_Abund_newdata)
 
-newdata = data.frame(GrazingYesNo = c("Yes", "Yes", "Yes","No", "No","No"),
-                     HerbTreat = c("Con","SnS","Spr"),
-                     Area=1)
-print(newdata)
+predict(DICK_Abund_Final, type = "state", newdata = DICK_Abund_newdata, appendData = T, level=0.9)
 
-mean((predict(model_11, type = "det"))[,1])
-#mean detection rate at all surveys for all observers is 0.29
+abundance_estimates = as.data.frame(predict(DICK_Abund_Final, type = "state", newdata = DICK_Abund_newdata, appendData = T, level=0.9))
 
-predict(model_9, type = "state", newdata = newdata, appendData = T)
-
-abundance_estimates = as.data.frame(predict(model_9, type = "state", newdata = newdata, appendData = T))
 
 ####1b. Total Nests####
 TotNestsGlobal  = glmmTMB (TotalNests ~  HerbTreat + GrazingYesNo + offset(log(Patchsize_ha))+ (1|Pasture), REML="FALSE", family=poisson, data=PatchData) 
@@ -122,15 +71,79 @@ summary(TotNestsFinal)
 ####2. NEST SCALE####
 ####..............................####
 
+#####2a. Nest survival####
+#analysis conducted in SAS using logistic exposure method
 
-#####2a. Orthoptera Abundance####
+
+#####2b. Parasitism Rates####
+ParaGlobal  = glmmTMB (Parasitized ~ InitiationJulian + SprayTreat  + Grazed + (1|Pasture), REML="FALSE", family="binomial",   data=Parasitism) # binomial
+summary(ParaGlobal)
+
+ParaFinal= glmmTMB (Parasitized ~  (1|Pasture), REML="FALSE", family="binomial",   data=Parasitism) # binomial
+summary(ParaFinal)
+
+#####2c. Parasitism Intensity ####
+ParaIntGlobal  = glmmTMB (ParasitismIntensity ~ InitiationJulian + SprayTreat  + Grazed + (1|Pasture), REML="FALSE", family=poisson,   data=Parasitism) # 
+summary(ParaIntGlobal)
+c_hat(ParaIntGlobal)
+
+ParaIntFinal= glmmTMB(ParasitismIntensity ~ InitiationJulian + SprayTreat   + (1|Pasture), REML="FALSE", family=poisson,   data=Parasitism) # binomial # 
+summary(ParaIntFinal)
+
+
+#####2c. Clutch Size####
+ClutchGlobal  = glmmTMB (ClutchSizeAdjust ~ InitiationJulian + HerbTreat  + GrazingYesNo, REML="FALSE", family=poisson,   data=Clutch) # 
+
+summary(ClutchGlobal)
+c_hat(ClutchGlobal)
+
+ClutchFinal  = glmmTMB (ClutchSizeAdjust ~ 1, REML="FALSE", family=poisson,   data=Clutch) # 
+summary(ClutchFinal)
+
+#####2d. Nestling Mass####
+
+MassGlobal    = glmmTMB (NestlingMass ~ OrdinalMeasured  + TimeOfDay  + NestlingAge + HerbTreat  + GrazingYesNo + (1|NestID), REML="FALSE", family=gaussian, data=Mass) 
+summary(MassGlobal)
+
+MassFinal = glmmTMB (NestlingMass ~ NestlingAge + (1|NestID), REML="FALSE", family=gaussian, data=Mass) 
+summary(MassFinal)
+
+
+#####2e. Provisioning Rates per hr####
+
+ProvGlobal    = glmmTMB (InstancesPerHr ~ NestlingAge_Days + TotalNestlingNum + HerbTreat +GrazingYesNo +(1|NestID), REML="FALSE", family="tweedie", data=Prov)  
+summary(ProvGlobal)
+
+ProvFinal    = glmmTMB (InstancesPerHr ~ NestlingAge_Days + TotalNestlingNum + (1|NestID), REML="FALSE", family="tweedie", data=Prov)  
+summary(ProvFinal)
+
+
+#####2f. Orthoptera Abundance####
 OrthGlobal  = glmmTMB (Orth ~ OrdinalDate + Method + HerbTreat_1418 + GrazingYesNo + (1|NestID), REML="FALSE", family=nbinom2,   data=ArthAbund) #negative binomial
 summary(OrthGlobal)
 #c_hat(OrthGlobal, method = "pearson") overdispersion >4
 
 OrthFinal= glmmTMB (Orth ~ OrdinalDate + Method + (1|NestID), REML="FALSE", family=nbinom2,   data=ArthAbund) #negative binomial
 summary(OrthFinal)
-#Global model - spiders (Aran)
 
+#####2g. Araneae Abundance####
 AranGlobal  = glmmTMB (Aran~OrdinalDate+Method+HerbTreat_1418 + GrazingYesNo + (1|NestID),REML="FALSE", family=nbinom2, data=ArthAbund) #negative binomial
 summary(AranGlobal)
+
+AranFinall  = glmmTMB (Aran~  GrazingYesNo + (1|NestID),REML="FALSE", family=nbinom2, data=ArthAbund) #negative binomial
+summary(AranFinal)
+
+
+#####2h. Lepidopteran Larvae Abundance####
+Lepid_CatGlobal  = glmmTMB (Lepid_Cat~OrdinalDate+Method+HerbTreat_1418 + GrazingYesNo,REML="FALSE", family=poisson,data=ArthAbund) 
+summary(Lepid_CatGlobal)
+c_hat(Lepid_CatGlobal)
+
+Lepid_CatFinal  = glmmTMB (Lepid_Cat~ OrdinalDate + Method + GrazingYesNo,REML="FALSE", family=poisson,data=ArthAbund) 
+summary(Lepid_CatFinal)
+
+####BIOMASS IS NEXT####
+
+####..............................####
+####3. Graphing/layout####
+####..............................####
