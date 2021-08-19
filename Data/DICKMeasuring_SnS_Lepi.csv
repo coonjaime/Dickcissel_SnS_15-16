@@ -1,0 +1,336 @@
+﻿ID,Order_LA,Length_mm,Category_Dummy,Category,NestID,Biomass_mg,Date Collected,OrdinalDate,﻿Pasture,Pasture_patch,Pasture_patch_year,HerbYesNo_alltime,HerbTreat_1418,GrazingYesNo
+429,lepidoptera_larva,26,2,Medium,GIL DICK 5 16,41.75034255,08/02/2016,215,GIL,GIL_C,GIL_C_2016,Yes,SnS,Yes
+428,lepidoptera_larva,21,2,Medium,GIL DICK 5 16,22.19222258,08/02/2016,215,GIL,GIL_C,GIL_C_2016,Yes,SnS,Yes
+431,lepidoptera_larva,12,1,Small,LTR DICK 2 16,4.236929264,07/14/2016,196,LTR,LTR_E,LTR_E_2016,Yes,SnS,Yes
+380,lepidoptera_larva,18,2,Medium,BSH DICK 9 16,14.06388314,08/08/2016,221,BSH,BSH_S,BSH_S_2016,Yes,SnS,No
+371,lepidoptera_larva,7,1,Small,BSH DICK 9 16,0.8598031,08/08/2016,221,BSH,BSH_S,BSH_S_2016,Yes,SnS,No
+378,lepidoptera_larva,17,2,Medium,BSH DICK 9 16,11.87550987,08/08/2016,221,BSH,BSH_S,BSH_S_2016,Yes,SnS,No
+377,lepidoptera_larva,16,2,Medium,BSH DICK 9 16,9.925329541,08/08/2016,221,BSH,BSH_S,BSH_S_2016,Yes,SnS,No
+376,lepidoptera_larva,15,1,Small,BSH DICK 9 16,8.199888405,08/08/2016,221,BSH,BSH_S,BSH_S_2016,Yes,SnS,No
+375,lepidoptera_larva,15,1,Small,BSH DICK 9 16,8.199888405,08/08/2016,221,BSH,BSH_S,BSH_S_2016,Yes,SnS,No
+374,lepidoptera_larva,11,1,Small,BSH DICK 9 16,3.275177651,08/08/2016,221,BSH,BSH_S,BSH_S_2016,Yes,SnS,No
+373,lepidoptera_larva,10,1,Small,BSH DICK 9 16,2.470323936,08/08/2016,221,BSH,BSH_S,BSH_S_2016,Yes,SnS,No
+427,lepidoptera_larva,20,2,Medium,GIL DICK 5 16,19.2088632,08/02/2016,215,GIL,GIL_C,GIL_C_2016,Yes,SnS,Yes
+412,lepidoptera_larva,10,1,Small,GIL DICK 4 16,2.470323936,08/02/2016,215,GIL,GIL_S,GIL_S_2016,No,Con,Yes
+379,lepidoptera_larva,18,2,Medium,BSH DICK 9 16,14.06388314,08/08/2016,221,BSH,BSH_S,BSH_S_2016,Yes,SnS,No
+407,lepidoptera_larva,12,1,Small,GIL DICK 3 16,4.236929264,08/02/2016,215,GIL,GIL_C,GIL_C_2016,Yes,SnS,Yes
+372,lepidoptera_larva,9,1,Small,BSH DICK 9 16,1.808662324,08/08/2016,221,BSH,BSH_S,BSH_S_2016,Yes,SnS,No
+381,lepidoptera_larva,8,1,Small,GIL DICK 3 16,1.276430515,08/02/2016,215,GIL,GIL_C,GIL_C_2016,Yes,SnS,Yes
+382,lepidoptera_larva,8,1,Small,GIL DICK 3 16,1.276430515,08/02/2016,215,GIL,GIL_C,GIL_C_2016,Yes,SnS,Yes
+383,lepidoptera_larva,8,1,Small,GIL DICK 3 16,1.276430515,08/02/2016,215,GIL,GIL_C,GIL_C_2016,Yes,SnS,Yes
+384,lepidoptera_larva,8,1,Small,GIL DICK 3 16,1.276430515,08/02/2016,215,GIL,GIL_C,GIL_C_2016,Yes,SnS,Yes
+385,lepidoptera_larva,9,1,Small,GIL DICK 3 16,1.808662324,08/02/2016,215,GIL,GIL_C,GIL_C_2016,Yes,SnS,Yes
+405,lepidoptera_larva,9,1,Small,GIL DICK 3 16,1.808662324,08/02/2016,215,GIL,GIL_C,GIL_C_2016,Yes,SnS,Yes
+413,lepidoptera_larva,12,1,Small,GIL DICK 4 16,4.236929264,08/02/2016,215,GIL,GIL_S,GIL_S_2016,No,Con,Yes
+415,lepidoptera_larva,13,1,Small,GIL DICK 4 16,5.369233435,08/02/2016,215,GIL,GIL_S,GIL_S_2016,No,Con,Yes
+416,lepidoptera_larva,15,1,Small,GIL DICK 4 16,8.199888405,08/02/2016,215,GIL,GIL_S,GIL_S_2016,No,Con,Yes
+417,lepidoptera_larva,16,2,Medium,GIL DICK 4 16,9.925329541,08/02/2016,215,GIL,GIL_S,GIL_S_2016,No,Con,Yes
+414,lepidoptera_larva,13,1,Small,GIL DICK 4 16,5.369233435,08/02/2016,215,GIL,GIL_S,GIL_S_2016,No,Con,Yes
+406,lepidoptera_larva,12,1,Small,GIL DICK 3 16,4.236929264,08/02/2016,215,GIL,GIL_C,GIL_C_2016,Yes,SnS,Yes
+426,lepidoptera_larva,16,2,Medium,GIL DICK 5 16,9.925329541,08/02/2016,215,GIL,GIL_C,GIL_C_2016,Yes,SnS,Yes
+408,lepidoptera_larva,12,1,Small,GIL DICK 3 16,4.236929264,08/02/2016,215,GIL,GIL_C,GIL_C_2016,Yes,SnS,Yes
+409,lepidoptera_larva,13,1,Small,GIL DICK 3 16,5.369233435,08/02/2016,215,GIL,GIL_C,GIL_C_2016,Yes,SnS,Yes
+410,lepidoptera_larva,13,1,Small,GIL DICK 3 16,5.369233435,08/02/2016,215,GIL,GIL_C,GIL_C_2016,Yes,SnS,Yes
+411,lepidoptera_larva,20,2,Medium,GIL DICK 3 16,19.2088632,08/02/2016,215,GIL,GIL_C,GIL_C_2016,Yes,SnS,Yes
+419,lepidoptera_larva,7,1,Small,GIL DICK 5 16,0.8598031,08/02/2016,215,GIL,GIL_C,GIL_C_2016,Yes,SnS,Yes
+420,lepidoptera_larva,7,1,Small,GIL DICK 5 16,0.8598031,08/02/2016,215,GIL,GIL_C,GIL_C_2016,Yes,SnS,Yes
+421,lepidoptera_larva,8,1,Small,GIL DICK 5 16,1.276430515,08/02/2016,215,GIL,GIL_C,GIL_C_2016,Yes,SnS,Yes
+422,lepidoptera_larva,9,1,Small,GIL DICK 5 16,1.808662324,08/02/2016,215,GIL,GIL_C,GIL_C_2016,Yes,SnS,Yes
+423,lepidoptera_larva,9,1,Small,GIL DICK 5 16,1.808662324,08/02/2016,215,GIL,GIL_C,GIL_C_2016,Yes,SnS,Yes
+424,lepidoptera_larva,10,1,Small,GIL DICK 5 16,2.470323936,08/02/2016,215,GIL,GIL_C,GIL_C_2016,Yes,SnS,Yes
+425,lepidoptera_larva,12,1,Small,GIL DICK 5 16,4.236929264,08/02/2016,215,GIL,GIL_C,GIL_C_2016,Yes,SnS,Yes
+418,lepidoptera_larva,20,2,Medium,GIL DICK 4 16,19.2088632,08/02/2016,215,GIL,GIL_S,GIL_S_2016,No,Con,Yes
+445,lepidoptera_larva,8,1,Small,RC2 DICK 1 16,1.276430515,06/15/2016,167,RC2,RC2_N,RC2_N_2016,Yes,SnS,No
+440,lepidoptera_larva,9,1,Small,LTR DICK 7 16,1.808662324,08/05/2016,218,LTR,LTR_E,LTR_E_2016,Yes,SnS,Yes
+441,lepidoptera_larva,9,1,Small,LTR DICK 7 16,1.808662324,08/05/2016,218,LTR,LTR_E,LTR_E_2016,Yes,SnS,Yes
+442,lepidoptera_larva,12,1,Small,LTR DICK 7 16,4.236929264,08/05/2016,218,LTR,LTR_E,LTR_E_2016,Yes,SnS,Yes
+443,lepidoptera_larva,18,2,Medium,LTR DICK 7 16,14.06388314,08/05/2016,218,LTR,LTR_E,LTR_E_2016,Yes,SnS,Yes
+444,lepidoptera_larva,26,2,Medium,LTR DICK 7 16,41.75034255,08/05/2016,218,LTR,LTR_E,LTR_E_2016,Yes,SnS,Yes
+470,lepidoptera_larva,7,1,Small,RC2 DICK 23 16,0.8598031,07/19/2016,201,RC2,RC2_C,RC2_C_2016,Yes,Spr,No
+472,lepidoptera_larva,8,1,Small,RC2 DICK 23 16,1.276430515,07/19/2016,201,RC2,RC2_C,RC2_C_2016,Yes,Spr,No
+464,lepidoptera_larva,14,1,Small,RC2 DICK 2 16,6.685698136,06/19/2016,171,RC2,RC2_C,RC2_C_2016,Yes,Spr,No
+492,lepidoptera_larva,13,1,Small,RC2 DICK 32 16,5.369233435,08/08/2016,221,RC2,RC2_C,RC2_C_2016,Yes,Spr,No
+446,lepidoptera_larva,7,1,Small,RC2 DICK 11 16,0.8598031,07/01/2016,183,RC2,RC2_N,RC2_N_2016,Yes,SnS,No
+447,lepidoptera_larva,12,1,Small,RC2 DICK 11 16,4.236929264,07/01/2016,183,RC2,RC2_N,RC2_N_2016,Yes,SnS,No
+448,lepidoptera_larva,13,1,Small,RC2 DICK 12 16,5.369233435,07/08/2016,190,RC2,RC2_N,RC2_N_2016,Yes,SnS,No
+449,lepidoptera_larva,9,1,Small,RC2 DICK 14 16,1.808662324,07/01/2016,183,RC2,RC2_N,RC2_N_2016,Yes,SnS,No
+450,lepidoptera_larva,11,1,Small,RC2 DICK 14 16,3.275177651,07/01/2016,183,RC2,RC2_N,RC2_N_2016,Yes,SnS,No
+451,lepidoptera_larva,15,1,Small,RC2 DICK 14 16,8.199888405,07/01/2016,183,RC2,RC2_N,RC2_N_2016,Yes,SnS,No
+469,lepidoptera_larva,4,1,Small,RC2 DICK 23 16,0.164153226,07/19/2016,201,RC2,RC2_C,RC2_C_2016,Yes,Spr,No
+489,lepidoptera_larva,8,1,Small,RC2 DICK 32 16,1.276430515,08/08/2016,221,RC2,RC2_C,RC2_C_2016,Yes,Spr,No
+471,lepidoptera_larva,7,1,Small,RC2 DICK 23 16,0.8598031,07/19/2016,201,RC2,RC2_C,RC2_C_2016,Yes,Spr,No
+430,lepidoptera_larva,5,1,Small,LTR DICK 2 16,0.317691905,07/14/2016,196,LTR,LTR_E,LTR_E_2016,Yes,SnS,Yes
+432,lepidoptera_larva,14,1,Small,LTR DICK 2 16,6.685698136,07/14/2016,196,LTR,LTR_E,LTR_E_2016,Yes,SnS,Yes
+433,lepidoptera_larva,16,2,Medium,LTR DICK 2 16,9.925329541,07/14/2016,196,LTR,LTR_E,LTR_E_2016,Yes,SnS,Yes
+473,lepidoptera_larva,14,1,Small,RC2 DICK 23 16,6.685698136,07/19/2016,201,RC2,RC2_C,RC2_C_2016,Yes,Spr,No
+483,lepidoptera_larva,8,1,Small,RC2 DICK 28 16,1.276430515,08/06/2016,219,RC2,RC2_C,RC2_C_2016,Yes,Spr,No
+439,lepidoptera_larva,8,1,Small,LTR DICK 7 16,1.276430515,08/05/2016,218,LTR,LTR_E,LTR_E_2016,Yes,SnS,Yes
+488,lepidoptera_larva,7,1,Small,RC2 DICK 32 16,0.8598031,08/08/2016,221,RC2,RC2_C,RC2_C_2016,Yes,Spr,No
+438,lepidoptera_larva,8,1,Small,LTR DICK 7 16,1.276430515,08/05/2016,218,LTR,LTR_E,LTR_E_2016,Yes,SnS,Yes
+434,lepidoptera_larva,7,1,Small,LTR DICK 4 16,0.8598031,07/14/2016,196,LTR,LTR_E,LTR_E_2016,Yes,SnS,Yes
+435,lepidoptera_larva,9,1,Small,LTR DICK 4 16,1.808662324,07/14/2016,196,LTR,LTR_E,LTR_E_2016,Yes,SnS,Yes
+436,lepidoptera_larva,20,2,Medium,LTR DICK 4 16,19.2088632,07/14/2016,196,LTR,LTR_E,LTR_E_2016,Yes,SnS,Yes
+437,lepidoptera_larva,7,1,Small,LTR DICK 7 16,0.8598031,08/05/2016,218,LTR,LTR_E,LTR_E_2016,Yes,SnS,Yes
+490,lepidoptera_larva,8,1,Small,RC2 DICK 32 16,1.276430515,08/08/2016,221,RC2,RC2_C,RC2_C_2016,Yes,Spr,No
+491,lepidoptera_larva,9,1,Small,RC2 DICK 32 16,1.808662324,08/08/2016,221,RC2,RC2_C,RC2_C_2016,Yes,Spr,No
+454,lepidoptera_larva,13,1,Small,RC2 DICK 15 16,5.369233435,06/19/2016,171,RC2,RC2_N,RC2_N_2016,Yes,SnS,No
+487,lepidoptera_larva,6,1,Small,RC2 DICK 32 16,0.544883248,08/08/2016,221,RC2,RC2_C,RC2_C_2016,Yes,Spr,No
+496,lepidoptera_larva,11,1,Small,RC2 DICK 8 16,3.275177651,06/30/2016,182,RC2,RC2_N,RC2_N_2016,Yes,SnS,No
+452,lepidoptera_larva,15,1,Small,RC2 DICK 14 16,8.199888405,07/01/2016,183,RC2,RC2_N,RC2_N_2016,Yes,SnS,No
+482,lepidoptera_larva,17,2,Medium,RC2 DICK 27 16,11.87550987,07/30/2016,212,RC2,RC2_N,RC2_N_2016,Yes,SnS,No
+484,lepidoptera_larva,14,1,Small,RC2 DICK 30 16,6.685698136,08/08/2016,221,RC2,RC2_N,RC2_N_2016,Yes,SnS,No
+485,lepidoptera_larva,21,2,Medium,RC2 DICK 30 16,22.19222258,08/08/2016,221,RC2,RC2_N,RC2_N_2016,Yes,SnS,No
+486,lepidoptera_larva,23,2,Medium,RC2 DICK 30 16,29.04735371,08/08/2016,221,RC2,RC2_N,RC2_N_2016,Yes,SnS,No
+493,lepidoptera_larva,7,1,Small,RC2 DICK 7 16,0.8598031,06/03/2016,155,RC2,RC2_N,RC2_N_2016,Yes,SnS,No
+480,lepidoptera_larva,14,1,Small,RC2 DICK 27 16,6.685698136,07/30/2016,212,RC2,RC2_N,RC2_N_2016,Yes,SnS,No
+495,lepidoptera_larva,8,1,Small,RC2 DICK 8 16,1.276430515,06/30/2016,182,RC2,RC2_N,RC2_N_2016,Yes,SnS,No
+479,lepidoptera_larva,11,1,Small,RC2 DICK 27 16,3.275177651,07/30/2016,212,RC2,RC2_N,RC2_N_2016,Yes,SnS,No
+497,lepidoptera_larva,13,1,Small,RC2 DICK 8 16,5.369233435,06/30/2016,182,RC2,RC2_N,RC2_N_2016,Yes,SnS,No
+463,lepidoptera_larva,13,1,Small,RC2 DICK 2 16,5.369233435,06/19/2016,171,RC2,RC2_C,RC2_C_2016,Yes,Spr,No
+457,lepidoptera_larva,17,2,Medium,RC2 DICK 16 16,11.87550987,06/28/2016,180,RC2,RC2_C,RC2_C_2016,Yes,Spr,No
+368,lepidoptera_larva,11,1,Small,BSH DICK 1 16,3.275177651,07/09/2016,191,BSH,BSH_C,BSH_C_2016,Yes,Spr,No
+369,lepidoptera_larva,19,2,Medium,BSH DICK 1 16,16.50387067,07/09/2016,191,BSH,BSH_C,BSH_C_2016,Yes,Spr,No
+370,lepidoptera_larva,6,1,Small,BSH DICK 10 16,0.544883248,08/08/2016,221,BSH,BSH_C,BSH_C_2016,Yes,Spr,No
+456,lepidoptera_larva,16,2,Medium,RC2 DICK 16 16,9.925329541,06/28/2016,180,RC2,RC2_C,RC2_C_2016,Yes,Spr,No
+494,lepidoptera_larva,10,1,Small,RC2 DICK 7 16,2.470323936,06/03/2016,155,RC2,RC2_N,RC2_N_2016,Yes,SnS,No
+466,lepidoptera_larva,8,1,Small,RC2 DICK 21 16,1.276430515,07/30/2016,212,RC2,RC2_N,RC2_N_2016,Yes,SnS,No
+455,lepidoptera_larva,17,2,Medium,RC2 DICK 15 16,11.87550987,06/19/2016,171,RC2,RC2_N,RC2_N_2016,Yes,SnS,No
+458,lepidoptera_larva,7,1,Small,RC2 DICK 17 16,0.8598031,07/08/2016,190,RC2,RC2_N,RC2_N_2016,Yes,SnS,No
+459,lepidoptera_larva,7,1,Small,RC2 DICK 17 16,0.8598031,07/08/2016,190,RC2,RC2_N,RC2_N_2016,Yes,SnS,No
+460,lepidoptera_larva,11,1,Small,RC2 DICK 17 16,3.275177651,07/08/2016,190,RC2,RC2_N,RC2_N_2016,Yes,SnS,No
+461,lepidoptera_larva,12,1,Small,RC2 DICK 17 16,4.236929264,07/08/2016,190,RC2,RC2_N,RC2_N_2016,Yes,SnS,No
+481,lepidoptera_larva,16,2,Medium,RC2 DICK 27 16,9.925329541,07/30/2016,212,RC2,RC2_N,RC2_N_2016,Yes,SnS,No
+465,lepidoptera_larva,5,1,Small,RC2 DICK 21 16,0.317691905,07/30/2016,212,RC2,RC2_N,RC2_N_2016,Yes,SnS,No
+453,lepidoptera_larva,16,2,Medium,RC2 DICK 14 16,9.925329541,07/01/2016,183,RC2,RC2_N,RC2_N_2016,Yes,SnS,No
+467,lepidoptera_larva,11,1,Small,RC2 DICK 21 16,3.275177651,07/30/2016,212,RC2,RC2_N,RC2_N_2016,Yes,SnS,No
+468,lepidoptera_larva,11,1,Small,RC2 DICK 21 16,3.275177651,07/30/2016,212,RC2,RC2_N,RC2_N_2016,Yes,SnS,No
+474,lepidoptera_larva,5,1,Small,RC2 DICK 27 16,0.317691905,07/30/2016,212,RC2,RC2_N,RC2_N_2016,Yes,SnS,No
+475,lepidoptera_larva,6,1,Small,RC2 DICK 27 16,0.544883248,07/30/2016,212,RC2,RC2_N,RC2_N_2016,Yes,SnS,No
+476,lepidoptera_larva,6,1,Small,RC2 DICK 27 16,0.544883248,07/30/2016,212,RC2,RC2_N,RC2_N_2016,Yes,SnS,No
+477,lepidoptera_larva,8,1,Small,RC2 DICK 27 16,1.276430515,07/30/2016,212,RC2,RC2_N,RC2_N_2016,Yes,SnS,No
+478,lepidoptera_larva,9,1,Small,RC2 DICK 27 16,1.808662324,07/30/2016,212,RC2,RC2_N,RC2_N_2016,Yes,SnS,No
+462,lepidoptera_larva,21,2,Medium,RC2 DICK 17 16,22.19222258,07/08/2016,190,RC2,RC2_N,RC2_N_2016,Yes,SnS,No
+402,lepidoptera_adult,9,1,Small,RC2 DICK 21 16,6.194954252,07/30/2016,212,RC2,RC2_N,RC2_N_2016,Yes,SnS,No
+395,lepidoptera_adult,13,1,Small,RC2 DICK 11 16,19.52648783,07/01/2016,183,RC2,RC2_N,RC2_N_2016,Yes,SnS,No
+392,lepidoptera_adult,6,1,Small,LTR DICK 4 16,1.746952887,07/14/2016,196,LTR,LTR_E,LTR_E_2016,Yes,SnS,Yes
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,

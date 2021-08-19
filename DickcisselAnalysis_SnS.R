@@ -15,6 +15,10 @@ Mass       = read_csv("NestlingMass_SnS.csv")
 Parasitism = read_csv("Parasitism_SprayPasturesOnly_EarlyDeathsRemoved_6.8.18.csv")
 PatchData  = read_csv("PatchNestData.csv") #note to self: this was dataset #10
 Prov       = read_csv("Provisioning_byClip.csv")
+OrthSize   = read_csv("DICKMeasuring_SnS_Orth.csv")
+AranSize   = read_csv("DICKMeasuring_SnS_Aran.csv")
+LepiSize   = read_csv("DICKMeasuring_SnS_Lepi.csv")
+
 
 ####..............................####
 ####1. PASTURE SCALE####
@@ -91,7 +95,7 @@ ParaIntFinal= glmmTMB(ParasitismIntensity ~ InitiationJulian + SprayTreat   + (1
 summary(ParaIntFinal)
 
 
-#####2c. Clutch Size####
+#####2d. Clutch Size####
 ClutchGlobal  = glmmTMB (ClutchSizeAdjust ~ InitiationJulian + HerbTreat  + GrazingYesNo, REML="FALSE", family=poisson,   data=Clutch) # 
 
 summary(ClutchGlobal)
@@ -100,7 +104,7 @@ c_hat(ClutchGlobal)
 ClutchFinal  = glmmTMB (ClutchSizeAdjust ~ 1, REML="FALSE", family=poisson,   data=Clutch) # 
 summary(ClutchFinal)
 
-#####2d. Nestling Mass####
+#####2e. Nestling Mass####
 
 MassGlobal    = glmmTMB (NestlingMass ~ OrdinalMeasured  + TimeOfDay  + NestlingAge + HerbTreat  + GrazingYesNo + (1|NestID), REML="FALSE", family=gaussian, data=Mass) 
 summary(MassGlobal)
@@ -109,7 +113,7 @@ MassFinal = glmmTMB (NestlingMass ~ NestlingAge + (1|NestID), REML="FALSE", fami
 summary(MassFinal)
 
 
-#####2e. Provisioning Rates per hr####
+#####2f. Provisioning Rates per hr####
 
 ProvGlobal    = glmmTMB (InstancesPerHr ~ NestlingAge_Days + TotalNestlingNum + HerbTreat +GrazingYesNo +(1|NestID), REML="FALSE", family="tweedie", data=Prov)  
 summary(ProvGlobal)
@@ -118,7 +122,7 @@ ProvFinal    = glmmTMB (InstancesPerHr ~ NestlingAge_Days + TotalNestlingNum + (
 summary(ProvFinal)
 
 
-#####2f. Orthoptera Abundance####
+#####2g. Orthoptera Abundance####
 OrthGlobal  = glmmTMB (Orth ~ OrdinalDate + Method + HerbTreat_1418 + GrazingYesNo + (1|NestID), REML="FALSE", family=nbinom2,   data=ArthAbund) #negative binomial
 summary(OrthGlobal)
 #c_hat(OrthGlobal, method = "pearson") overdispersion >4
@@ -126,7 +130,7 @@ summary(OrthGlobal)
 OrthFinal= glmmTMB (Orth ~ OrdinalDate + Method + (1|NestID), REML="FALSE", family=nbinom2,   data=ArthAbund) #negative binomial
 summary(OrthFinal)
 
-#####2g. Araneae Abundance####
+#####2h. Araneae Abundance####
 AranGlobal  = glmmTMB (Aran~OrdinalDate+Method+HerbTreat_1418 + GrazingYesNo + (1|NestID),REML="FALSE", family=nbinom2, data=ArthAbund) #negative binomial
 summary(AranGlobal)
 
@@ -134,7 +138,7 @@ AranFinall  = glmmTMB (Aran~  GrazingYesNo + (1|NestID),REML="FALSE", family=nbi
 summary(AranFinal)
 
 
-#####2h. Lepidopteran Larvae Abundance####
+#####2i. Lepidopteran Larvae Abundance####
 Lepid_CatGlobal  = glmmTMB (Lepid_Cat~OrdinalDate+Method+HerbTreat_1418 + GrazingYesNo,REML="FALSE", family=poisson,data=ArthAbund) 
 summary(Lepid_CatGlobal)
 c_hat(Lepid_CatGlobal)
@@ -142,7 +146,27 @@ c_hat(Lepid_CatGlobal)
 Lepid_CatFinal  = glmmTMB (Lepid_Cat~ OrdinalDate + Method + GrazingYesNo,REML="FALSE", family=poisson,data=ArthAbund) 
 summary(Lepid_CatFinal)
 
-####BIOMASS IS NEXT####
+#####2j. Orth Biomass####
+OrthSizeGlobal  = glmmTMB (log(Biomass_mg)~OrdinalDate+HerbTreat_1418 + GrazingYesNo +(1|NestID),REML="FALSE", family=gaussian,data=OrthSize) 
+summary(OrthSizeGlobal)
+
+OrthSizeFinal  = glmmTMB (log(Biomass_mg)~OrdinalDate +(1|NestID),REML="FALSE", family=gaussian,data=OrthSize) 
+summary(OrthSizeFinal)
+
+#####2k. Aran Biomass####
+AranSizeGlobal  = glmmTMB (log(Biomass_mg)~OrdinalDate+HerbTreat_1418 + GrazingYesNo +(1|NestID),REML="FALSE", family=gaussian,data=AranSize) 
+summary(AranSizeGlobal)
+
+AranSizeFinal  = glmmTMB (log(Biomass_mg)~HerbTreat_1418 +(1|NestID),REML="FALSE", family=gaussian,data=AranSize) 
+summary(AranSizeFinal)
+
+#####2l. Lepi Biomass####
+LepidSizeGlobal  = glmmTMB (log(Biomass_mg)~OrdinalDate+HerbTreat_1418 + GrazingYesNo +(1|NestID),REML="FALSE", family=gaussian,data=LepiSize) 
+summary(LepidSizeGlobal)
+
+LepidSizeFinal  = glmmTMB (log(Biomass_mg)~HerbTreat_1418  +(1|NestID),REML="FALSE", family=gaussian,data=LepiSize) 
+summary(LepidSizeFinal)
+
 
 ####..............................####
 ####3. Graphing/layout####
