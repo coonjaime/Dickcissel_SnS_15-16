@@ -1,12 +1,19 @@
+####..............................####
+#METADATA----
+####..............................####
+
+#Attributions
+#>> Code accompanies the following in review manuscript:
+#Coon, J.J., S.B. Maresh Nelson, R.C. Daughtridge, and J.R. Miller
+#Title....
+#>> Code was written by J. Coon and can be found at: https://github.com/coonjaime/Dickcissel_SnS_16
+
 #Packages----
-#install.packages(c("tidyverse", "glmmTMB","unmarked","ggeffects","aiccmodavg","check_overdispersion"))
-library(tidyverse)
-library(glmmTMB)
-library(ggeffects)
-library(AICcmodavg)
-library(unmarked)
-library(ggeffects)
-library(patchwork)
+#install.packages("easypackages")
+library(easypackages)
+
+packages( "tidyverse", "glmmTMB", "unmarked", "ggeffects","patchwork")
+#"AICcmodavg",
 
 #Importing & Setup----
 setwd('/cloud/project/Data')
