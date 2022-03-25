@@ -10,10 +10,16 @@
 
 #Packages----
 #install.packages("easypackages")
+#remotes::install_github("pcdjohnson/GLMMmisc")
+
 library(easypackages)
 
-packages( "tidyverse", "glmmTMB", "unmarked", "ggeffects","patchwork")
+packages("GLMMmisc", "remotes","tidyverse", "ggeffects", "unmarked", "patchwork","lme4","MASS")
 #"AICcmodavg",
+
+require(devtools)
+install_version("glmmTMB", version = "1.1.2", repos = "http://cran.us.r-project.org", INSTALL_opts = '--no-lock')
+
 
 #Importing & Setup----
 setwd('/cloud/project/Data')
@@ -27,6 +33,7 @@ Prov       = read_csv("Provisioning_byClip.csv")
 OrthSize   = read_csv("DICKMeasuring_SnS_Orth.csv")
 AranSize   = read_csv("DICKMeasuring_SnS_Aran.csv")
 LepiSize   = read_csv("DICKMeasuring_SnS_Lepi.csv")
+Survival   = read_csv("NestMonitoring3.csv")
 
 dodge <- position_dodge(width=0.9)
 
@@ -113,12 +120,36 @@ DICK_Abund_Plot
 
 
 ####1b. Total Nests####
-TotNestsGlobal  = glmmTMB (TotalNests ~  HerbTreat + GrazingYesNo + offset(log(Patchsize_ha))+ (1|Pasture), REML="FALSE", family=poisson, data=PatchData) 
+TotNestsGlobal  = glmmTMB (TotalNests ~  HerbTreat + GrazingYesNo + offset(log(Patchsize_ha))+ (1|Pasture), family=poisson, data=PatchData, REML=FALSE) 
 summary(TotNestsGlobal)
 
-c_hat(TotNestsGlobal, method = "pearson") #overdispersion <4 (2.66)
 
-TotNestsFinal  = glmmTMB (TotalNests ~ HerbTreat + GrazingYesNo + offset(log(Patchsize_ha))+ (1|Pasture), REML="FALSE", family=poisson, data=PatchData) 
+####trying something####
+TotNestsPower  = glmer (TotalNests ~  HerbTreat + GrazingYesNo + (1|Pasture), family="poisson", data=PatchData) 
+PowerTotNestsData=sim.glmm(mer.fit=TotNestsPower)
+sim.TotNests.data <- function(...){
+  sim.glmm(TotNestsPower)}
+sim.TotNests.data()
+
+set.seed(135791) # set seed for random number generator to give repeatable results
+
+sim.tick.err <- function(...){
+  fit <-glmer(response ~ HerbTreat + GrazingYesNo
+              + (1|Pasture), family="poisson", data=sim.TotNests.data())
+  intercept <- fixef(fit)
+  estimate <- exp(intercept)
+  se <- coef(summary(fit))[,"Std. Error"]
+  ci.lo <- exp(intercept - qnorm(0.95) * se)
+  ci.hi <- exp(intercept + qnorm(0.5) * se)
+  as.vector(100 * 0.5 * (ci.hi - ci.lo) / estimate)}
+
+sim.err <- sapply(1:50, sim.tick.err)
+mean(sim.err)
+
+
+
+#Final model
+TotNestsFinal  = glmmTMB (TotalNests ~ HerbTreat + GrazingYesNo + as.factor(offset(log(Patchsize_ha)))+ (1|Pasture), REML="FALSE", family=nbinom2, data=PatchData) 
 summary(TotNestsFinal)
 
 #producing predicted values
@@ -126,6 +157,8 @@ TotNests_Pred = as.data.frame(ggpredict(TotNestsFinal,c("HerbTreat", "GrazingYes
 colnames(TotNests_Pred)=c("HerbTreat", "Predicted","SE","Lower","Upper", "Grazing") #renames columns
 print(TotNests_Pred) 
 confint(TotNestsFinal, level = 0.85)
+
+c_hat(TotNestsFinal, method = "pearson") #overdispersion >2 (2.66)
 
 #reordering factors
 TotNests_Pred$HerbTreat=factor(TotNests_Pred$HerbTreat,levels=c("Con","Spr","SnS"),labels=c("Control","Spray","Spray & Seed"))
@@ -135,7 +168,7 @@ TotNests_Plot=ggplot(data=TotNests_Pred, y=Predicted, x=Grazing)+
   geom_bar(aes(x=Grazing, y=Predicted,fill=HerbTreat), position=dodge, stat="identity")+
   scale_fill_manual(values=c("goldenrod3","darkseagreen4","darkslategray"))+
   scale_x_discrete(labels=c("Ungrazed","Grazed"))+
-  scale_y_continuous(limits=c(0,33),expand = c(0, 0)) +
+  scale_y_continuous(limits=c(0,40),expand = c(0, 0)) +
   geom_errorbar(aes(x = Grazing, ymin = Lower, ymax = Upper, group=HerbTreat),position = dodge, width = 0.2)+
   labs(y = "Total Nests per Patch", x=" ")+
   theme_bar_SnS_leg()+
@@ -147,7 +180,7 @@ TotNests_Plot
 TotFledgedGlobal  = glmmTMB (TotalDICKFledged ~  HerbTreat + GrazingYesNo + offset(log(Patchsize_ha))+ (1|Pasture), REML="FALSE", family=poisson, data=PatchData) 
 summary(TotFledgedGlobal)
 
-c_hat(TotFledgedGlobal, method = "pearson") #overdispersion <4 (2)
+c_hat(TotFledgedGlobal, method = "pearson") #overdispersion <2 (2)
 
 TotFledgedFinal  = glmmTMB (TotalDICKFledged ~ HerbTreat +(TotalNests)+ (1|Pasture), REML="FALSE", family=poisson, data=PatchData) 
 summary(TotFledgedFinal)
@@ -180,12 +213,76 @@ TotFledged_Plot
 #####2a. Nest survival####
 #analysis conducted in SAS using logistic exposure method
 
+#some data manipulaton to add herbicide treatment to this data, merged from the Clutch dataset
+
+#logistic exposure function
+logexp <- function(exposure = 1) {
+  get_exposure <- function() {
+    if (exists("..exposure", env=.GlobalEnv))
+      return(get("..exposure", envir=.GlobalEnv))
+    exposure
+  }
+  linkfun <- function(mu) qlogis(mu^(1/get_exposure()))
+  linkinv <- function(eta) plogis(eta)^get_exposure()
+  logit_mu_eta <- function(eta) {
+    ifelse(abs(eta)>30,.Machine$double.eps,
+           exp(eta)/(1+exp(eta))^2)
+  }
+  mu.eta <- function(eta) {       
+    get_exposure() * plogis(eta)^(get_exposure()-1) *
+      logit_mu_eta(eta)
+  }
+  valideta <- function(eta) TRUE
+  link <- paste("logexp(", deparse(substitute(exposure)), ")",
+                sep="")
+  structure(list(linkfun = linkfun, linkinv = linkinv,
+                 mu.eta = mu.eta, valideta = valideta, 
+                 name = link),
+            class = "link-glm")
+}
+
+Survive_Global = glm (Survive ~ HerbTreat + GrazingYesNo + JulianDate + Stage + Pasture, data=Survival,family=binomial(link=logexp(exposure=Survival$ExpDays))) # binomial
+summary(Survive_Global)
+
+Survive_Final = glm (Survive ~ as.factor(HerbTreat)  + JulianDate + as.factor(Pasture), data=Survival,family=binomial(link=logexp(exposure=Survival$ExpDays))) # binomial
+summary(Survive_Final)
+#https://rpubs.com/bbolker/logregexp
+#also https://www.perrywilliams.us/wp-content/uploads/2018/03/Crimmins2016factors.pdf
+
+summary(Survival$HerbTreat)
+
+#producing predicted values
+Survive_Pred = as.data.frame(ggpredict(Survive_Global,terms=c("HerbTreat","Pasture"),
+                                       ci.lvl=0.85, 
+                                       back.transform=TRUE, 
+                                       append=TRUE)) #turns predictions into a dataframe that we can more easily manipulate
+colnames(Survive_Pred)=c("HerbTreat", "Predicted","SE","Lower","Upper","Pasture") #renames columns
+print(Survive_Pred) 
+confint(Survive_Final, level = 0.85)
+
+Survive_Pred_Sum =Survive_Pred%>%
+  group_by(HerbTreat)%>%
+  summarise_at(vars(Predicted,SE,Lower,Upper),mean)
+
+
+#plotg
+Survive_Plot=ggplot(data=Survive_Pred_Sum, y=Predicted, x=HerbTreat)+  
+  geom_bar(aes(x=HerbTreat, y=Predicted,fill=HerbTreat), position=dodge, stat="identity")+
+  scale_fill_manual(values=c("goldenrod3","darkseagreen4","darkslategray"))+
+  #scale_x_discrete(labels=c("Control","Spray","Spray & Seed"))+
+  scale_y_continuous(limits=c(0,1),expand = c(0, 0)) +
+  geom_errorbar(aes(x = HerbTreat, ymin = Lower, ymax = Upper,group=HerbTreat),position = dodge, width = 0.2)+
+  labs(y = "Daily Nest Survival",x="Herbicide Treatment")+
+  scale_x_discrete(labels=c("Control","Spray","Spray & Seed"))+
+  
+  theme_bar_SnS_noleg()
+Survive_Plot
 
 #####2b. Parasitism Rates####
 ParaGlobal  = glmmTMB (Parasitized ~ InitiationJulian + SprayTreat  + Grazed + (1|Pasture), REML="FALSE", family="binomial",   data=Parasitism) # binomial
 summary(ParaGlobal)
 
-ParaFinal= glmmTMB (Parasitized ~  (1|Pasture), REML="FALSE", family="binomial",   data=Parasitism) # binomial
+ParaFinal= glmmTMB (Parasitized ~  InitiationJulian +(1|Pasture), REML="FALSE", family="binomial",   data=Parasitism) # binomial
 summary(ParaFinal)
 
 #no plot
@@ -200,8 +297,7 @@ summary(as.factor(Parasitism$SprayTreat))
 #global model
 ParaIntGlobal  = glmmTMB (ParasitismIntensity ~ InitiationJulian + SprayTreat  + Grazed + (1|Pasture), REML="FALSE", family=poisson,   data=Parasitism) # 
 summary(ParaIntGlobal)
-c_hat(ParaIntGlobal)
-
+c_hat(ParaIntGlobal) #1.33
 #final model
 ParaIntFinal= glmmTMB(ParasitismIntensity ~ InitiationJulian + SprayTreat   + (1|Pasture), REML="FALSE", family=poisson,   data=Parasitism) # binomial # 
 summary(ParaIntFinal)
@@ -227,10 +323,9 @@ ParaInt_Plot=ggplot(data=ParaInt_Pred, y=Predicted, x=HerbTreat)+
 ParaInt_Plot
 
 #####2d. Clutch Size####
-ClutchGlobal  = glmmTMB (ClutchSizeAdjust ~ InitiationJulian + HerbTreat  + GrazingYesNo, REML="FALSE", family=poisson,   data=Clutch) # 
-
+ClutchGlobal  = glmmTMB (ClutchSizeAdjust ~ InitiationJulian + HerbTreat  + GrazingYesNo, REML="FALSE", family=poisson, data=Clutch) # 
 summary(ClutchGlobal)
-c_hat(ClutchGlobal)
+c_hat(ClutchGlobal) #.22 - underdispersed
 
 ClutchFinal  = glmmTMB (ClutchSizeAdjust ~ 1, REML="FALSE", family=poisson,   data=Clutch) # 
 summary(ClutchFinal)
@@ -280,7 +375,7 @@ Aran_Plot=ggplot(data=Aran_Pred, y=Predicted, x=Grazing)+
   scale_x_discrete(labels=c("Ungrazed","Grazed"))+
  scale_y_continuous(limits=c(0,20.2),expand = c(0, 0)) +
   geom_errorbar(aes(x = Grazing, ymin = Lower, ymax = Upper),position = dodge, width = 0.2)+
-  labs(y = "Spider per Sample", x=" ")+
+  labs(y = "Spider per Sample", x="Grazing Status")+
   theme_bar_SnS_noleg()
 Aran_Plot
 
@@ -335,11 +430,11 @@ confint(ParaIntFinal, level = 0.85)
 AranSize_Pred$HerbTreat=factor(AranSize_Pred$HerbTreat,levels=c("Con","Spr","SnS"))
 
 #plot
-AranSize_Plot=ggplot(data=ParaInt_Pred, y=Predicted, x=HerbTreat)+  
+AranSize_Plot=ggplot(data=AranSize_Pred, y=Predicted, x=HerbTreat)+  
   geom_bar(aes(x=HerbTreat, y=Predicted,fill=HerbTreat), position=dodge, stat="identity")+
   scale_fill_manual(values=c("goldenrod3","darkseagreen4","darkslategray"))+
   scale_x_discrete(breaks=c("Con","Spr","SnS"),labels=c("Control","Spray","Spray & Seed"))+
-  scale_y_continuous(limits=c(0,2.3),expand = c(0, 0)) +
+  scale_y_continuous(limits=c(0,11),expand = c(0, 0)) +
   geom_errorbar(aes(x = HerbTreat, ymin = Lower, ymax = Upper),position = dodge, width = 0.2)+
  labs(y = "Spider Size (mg)", x="Herbicide Treatment")+
   theme_bar_SnS_noleg()+
@@ -366,11 +461,11 @@ confint(ParaIntFinal, level = 0.85)
 LepidSize_Pred$HerbTreat=factor(LepidSize_Pred$HerbTreat,levels=c("Con","Spr","SnS"))
 
 #plot
-LepidSize_Plot=ggplot(data=ParaInt_Pred, y=Predicted, x=HerbTreat)+  
+LepidSize_Plot=ggplot(data=LepidSize_Pred, y=Predicted, x=HerbTreat)+  
   geom_bar(aes(x=HerbTreat, y=Predicted,fill=HerbTreat), position=dodge, stat="identity")+
   scale_fill_manual(values=c("goldenrod3","darkseagreen4","darkslategray"))+
   scale_x_discrete(breaks=c("Con","Spr","SnS"),labels=c("Control","Spray","Spray & Seed"))+
-  scale_y_continuous(limits=c(0,2.3),expand = c(0, 0)) +
+  scale_y_continuous(limits=c(0,13),expand = c(0, 0)) +
   geom_errorbar(aes(x = HerbTreat, ymin = Lower, ymax = Upper),position = dodge, width = 0.2)+
   labs(y = "Caterpillar Size (mg)", x=" ")+
   theme_bar_SnS_noleg()+
@@ -431,7 +526,8 @@ Fig4 =
   DICK_Abund_Plot + 
   TotFledged_Plot + 
   plot_layout(guides = "collect",
-              nrow=2)
+              nrow=2)+ 
+  plot_annotation(tag_levels = 'A')
 Fig4
 
 ggsave("Fig4.jpeg", Fig4,unit="in", width=8,height=6, dpi=600)
@@ -439,13 +535,14 @@ ggsave("Fig4.jpeg", Fig4,unit="in", width=8,height=6, dpi=600)
 
 Fig5 =  
   AranSize_Plot+
-  Lepid_Cat_Plot + 
-  LepidSize_Plot + 
   Aran_Plot + 
+  LepidSize_Plot + 
+  Lepid_Cat_Plot + 
   ParaInt_Plot+
-  guide_area()+
+  Survive_Plot+
   plot_layout(guides = "collect",
-              nrow=3)
+              nrow=3)+ 
+  plot_annotation(tag_levels = 'A')
 Fig5
 
 ggsave("Fig5.jpeg", Fig5, unit="in", width=8,height=9, dpi=600)
