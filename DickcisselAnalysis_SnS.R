@@ -14,15 +14,13 @@
 
 library(easypackages)
 
-packages("GLMMmisc", "remotes","tidyverse", "ggeffects", "unmarked", "patchwork","lme4","MASS")
+packages("remotes","tidyverse", "ggeffects", "unmarked", "patchwork","lme4","MASS")
 #"AICcmodavg",
 
-require(devtools)
-install_version("glmmTMB", version = "1.1.2", repos = "http://cran.us.r-project.org", INSTALL_opts = '--no-lock')
-
-
 #Importing & Setup----
-setwd('/cloud/project/Data')
+#setwd('/cloud/project/Data')
+setwd("~/Dropbox/_Manuscripts/Dissertation/Ch. 2/Dickcissel_SnS_16/Data")
+
 ArthAbund  = read_csv("ArthAbund.csv")
 Clutch     = read_csv("ClutchSize_SnS.csv")
 DICK_data  = read_csv("DICK_RData2.csv")
@@ -123,31 +121,6 @@ DICK_Abund_Plot
 TotNestsGlobal  = glmmTMB (TotalNests ~  HerbTreat + GrazingYesNo + offset(log(Patchsize_ha))+ (1|Pasture), family=poisson, data=PatchData, REML=FALSE) 
 summary(TotNestsGlobal)
 
-
-####trying something####
-TotNestsPower  = glmer (TotalNests ~  HerbTreat + GrazingYesNo + (1|Pasture), family="poisson", data=PatchData) 
-PowerTotNestsData=sim.glmm(mer.fit=TotNestsPower)
-sim.TotNests.data <- function(...){
-  sim.glmm(TotNestsPower)}
-sim.TotNests.data()
-
-set.seed(135791) # set seed for random number generator to give repeatable results
-
-sim.tick.err <- function(...){
-  fit <-glmer(response ~ HerbTreat + GrazingYesNo
-              + (1|Pasture), family="poisson", data=sim.TotNests.data())
-  intercept <- fixef(fit)
-  estimate <- exp(intercept)
-  se <- coef(summary(fit))[,"Std. Error"]
-  ci.lo <- exp(intercept - qnorm(0.95) * se)
-  ci.hi <- exp(intercept + qnorm(0.5) * se)
-  as.vector(100 * 0.5 * (ci.hi - ci.lo) / estimate)}
-
-sim.err <- sapply(1:50, sim.tick.err)
-mean(sim.err)
-
-
-
 #Final model
 TotNestsFinal  = glmmTMB (TotalNests ~ HerbTreat + GrazingYesNo + as.factor(offset(log(Patchsize_ha)))+ (1|Pasture), REML="FALSE", family=nbinom2, data=PatchData) 
 summary(TotNestsFinal)
@@ -244,7 +217,7 @@ logexp <- function(exposure = 1) {
 Survive_Global = glm (Survive ~ HerbTreat + GrazingYesNo + JulianDate + Stage + Pasture, data=Survival,family=binomial(link=logexp(exposure=Survival$ExpDays))) # binomial
 summary(Survive_Global)
 
-Survive_Final = glm (Survive ~ as.factor(HerbTreat)  + JulianDate + as.factor(Pasture), data=Survival,family=binomial(link=logexp(exposure=Survival$ExpDays))) # binomial
+Survive_Final = glm (Survive ~ HerbTreat  + JulianDate + Pasture, data=Survival,family=binomial(link=logexp(exposure=Survival$ExpDays))) # binomial
 summary(Survive_Final)
 #https://rpubs.com/bbolker/logregexp
 #also https://www.perrywilliams.us/wp-content/uploads/2018/03/Crimmins2016factors.pdf
@@ -252,12 +225,14 @@ summary(Survive_Final)
 summary(Survival$HerbTreat)
 
 #producing predicted values
-Survive_Pred = as.data.frame(ggpredict(Survive_Global,terms=c("HerbTreat","Pasture"),
+..exposure <- 1
+Survive_Pred = as.data.frame(ggpredict(Survive_Final,terms=c("HerbTreat","Pasture"),
                                        ci.lvl=0.85, 
                                        back.transform=TRUE, 
                                        append=TRUE)) #turns predictions into a dataframe that we can more easily manipulate
 colnames(Survive_Pred)=c("HerbTreat", "Predicted","SE","Lower","Upper","Pasture") #renames columns
 print(Survive_Pred) 
+rm(..exposure)
 confint(Survive_Final, level = 0.85)
 
 Survive_Pred_Sum =Survive_Pred%>%
@@ -534,7 +509,7 @@ ggsave("Fig4.jpeg", Fig4,unit="in", width=8,height=6, dpi=600)
 
 
 Fig5 =  
-  AranSize_Plot+
+  AranSize_Plot +
   Aran_Plot + 
   LepidSize_Plot + 
   Lepid_Cat_Plot + 
