@@ -19,19 +19,19 @@ packages("remotes","tidyverse", "ggeffects", "unmarked", "patchwork","lme4","MAS
 
 #Importing & Setup----
 #setwd('/cloud/project/Data')
-setwd("~/Dropbox/_Manuscripts/Dissertation/Ch. 2/Dickcissel_SnS_16/Data")
+setwd("~/Dropbox/_Manuscripts/Dissertation/Ch. 2/Dickcissel_SnS_16")
 
-ArthAbund  = read_csv("ArthAbund.csv")
-Clutch     = read_csv("ClutchSize_SnS.csv")
-DICK_data  = read_csv("DICK_RData2.csv")
-Mass       = read_csv("NestlingMass_SnS.csv")
-Parasitism = read_csv("Parasitism_SprayPasturesOnly_EarlyDeathsRemoved_6.8.18.csv")
-PatchData  = read_csv("PatchNestData.csv") #note to self: this was dataset #10
-Prov       = read_csv("Provisioning_byClip.csv")
-OrthSize   = read_csv("DICKMeasuring_SnS_Orth.csv")
-AranSize   = read_csv("DICKMeasuring_SnS_Aran.csv")
-LepiSize   = read_csv("DICKMeasuring_SnS_Lepi.csv")
-Survival   = read_csv("NestMonitoring3.csv")
+ArthAbund  = read_csv("Data/ArthAbund.csv")
+Clutch     = read_csv("Data/ClutchSize_SnS.csv")
+DICK_data  = read_csv("Data/DICK_RData2.csv")
+Mass       = read_csv("Data/NestlingMass_SnS.csv")
+Parasitism = read_csv("Data/Parasitism_SprayPasturesOnly_EarlyDeathsRemoved_6.8.18.csv")
+PatchData  = read_csv("Data/PatchNestData.csv") #note to self: this was dataset #10
+Prov       = read_csv("Data/Provisioning_byClip.csv")
+OrthSize   = read_csv("Data/DICKMeasuring_SnS_Orth.csv")
+AranSize   = read_csv("Data/DICKMeasuring_SnS_Aran.csv")
+LepiSize   = read_csv("Data/DICKMeasuring_SnS_Lepi.csv")
+Survival   = read_csv("Data/NestMonitoring3.csv")
 
 dodge <- position_dodge(width=0.9)
 
@@ -491,9 +491,7 @@ Fig3 = ggplot(data=SampSize,aes(x=HerbTreat, y=Number, group=Nests))+
        #legend.position=c(0.85, 0.8))
 Fig3
 
-setwd('/cloud/project/Figures')
-
-ggsave("Fig3.jpeg", Fig3,unit="in", width=6,height=4, dpi=600)
+ggsave("Figures/Fig3.jpeg", Fig3,unit="in", width=6,height=4, dpi=600)
 
 Fig4 =  
   TotNests_Plot + 
@@ -505,7 +503,7 @@ Fig4 =
   plot_annotation(tag_levels = 'A')
 Fig4
 
-ggsave("Fig4.jpeg", Fig4,unit="in", width=8,height=6, dpi=600)
+ggsave("Figures/Fig4.jpeg", Fig4,unit="in", width=8,height=6, dpi=600)
 
 
 Fig5 =  
@@ -520,6 +518,6 @@ Fig5 =
   plot_annotation(tag_levels = 'A')
 Fig5
 
-ggsave("Fig5.jpeg", Fig5, unit="in", width=8,height=9, dpi=600)
+ggsave("Figures/Fig5.jpeg", Fig5, unit="in", width=8,height=9, dpi=600)
 
 
